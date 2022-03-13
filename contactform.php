@@ -131,9 +131,9 @@ a {
 			echo "E-mail";
 			echo "</th>";
 			echo "</tr>";
-			echo "<tr>";
 			while($row=mysqli_fetch_array($re))
 			{
+				echo "<tr>";
 				echo "<td>";
 				echo $row['name'];
 				echo "</td>";
@@ -143,8 +143,9 @@ a {
 				echo "<td>";
 				echo $row['email'];
 				echo "</td>";
+				echo "</tr>";
 			}
-			echo "</tr>";
+
 			echo "</table>";
 			
 		}
@@ -168,11 +169,16 @@ if(isset($_POST['submit1']))
 			  die("Connection failed: " . $conn->connect_error);
 			}
 
-			$sql = "INSERT INTO  contacts(name, phonenumber, email)
+			$sql = "INSERT INTO  contacts(name, phoneno, email)
 			VALUES ('$name', '$phoneno', '$email')";
 
 			if ($conn->query($sql) === TRUE) {
-			  echo "New Contact Saved Successfull";
+						?>
+				<script>
+				alert("contact saved successfull Updated in list..!");
+				window.location="contactform.php";
+				</script>	
+			<?php
 			} else {
 			  echo "Error: " . $sql . "<br>" . $conn->error;
 			}
